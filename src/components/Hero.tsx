@@ -2,12 +2,12 @@ import { motion } from 'framer-motion'
 import { Github, Linkedin, FileDown, ArrowDown } from 'lucide-react'
 import { useI18n } from '../i18n/I18nContext'
 
-// Detecta automaticamente o primeiro PDF em public/resumes/
-const pdfFiles = import.meta.glob('/resumes/*.pdf', { eager: true, query: '?url', import: 'default' }) as Record<string, string>
+// Detecta automaticamente o primeiro PDF em src/assets/resumes/
+const pdfFiles = import.meta.glob('../assets/resumes/*.pdf', { eager: true, query: '?url', import: 'default' }) as Record<string, string>
 const resumeEntries = Object.entries(pdfFiles)
 const resumeUrl = resumeEntries.length > 0
     ? resumeEntries[0][1] as string
-    : '/resume.pdf'
+    : '#'
 
 export default function Hero() {
     const { t } = useI18n()
