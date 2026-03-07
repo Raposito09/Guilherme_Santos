@@ -5,11 +5,10 @@ import { Github, Linkedin, Mail, Send, Loader2, CheckCircle2, XCircle } from 'lu
 import { useI18n } from '../i18n/I18nContext'
 import emailjs from '@emailjs/browser'
 
-// ⚠️ credencial do emailjs
-
-const EMAILJS_SERVICE_ID = 'service_wmdcnb2'    // seu Service ID
-const EMAILJS_TEMPLATE_ID = 'template_9df7ie9'  // seu Template ID  
-const EMAILJS_PUBLIC_KEY = 'b1VOGOttgZBEWQ1oY'     // sua Public Key
+// Credenciais do EmailJS (carregadas de variáveis de ambiente .env)
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
 type FormStatus = 'idle' | 'sending' | 'sent' | 'error'
 
