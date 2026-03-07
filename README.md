@@ -6,7 +6,7 @@ Site portfólio pessoal desenvolvido com **React**, **TypeScript**, **Tailwind C
 
 - 🎨 Design moderno com tema escuro e animações com Framer Motion (https://motion.dev)
 - 🌍 Suporte a 3 idiomas (Português, English, Español) - facilitando o acesso a página para pessoas de diferentes países (https://react.i18next.com)
-- 📄 Download automático de currículo — basta colocar um PDF na pasta `public/resumes/`
+- 📄 Download automático de currículo — basta colocar um PDF na pasta `src/assets/resumes/`
 - 📬 Formulário de contato funcional com EmailJS - envio de emails para Guilherme Santos (https://emailjs.com)
 - 📱 Layout totalmente responsivo - adaptando-se a diferentes tamanhos de tela (https://tailwindcss.com/docs/responsive-design)
   
@@ -25,7 +25,7 @@ npm run build
 
 ## 📄 Como Atualizar o Currículo do Projeto
 
-1. Coloque seu arquivo `.pdf` na pasta `public/resumes/`
+1. Coloque seu arquivo `.pdf` na pasta `src/assets/resumes/`
 2. Reinicie o servidor de desenvolvimento (`npm run dev`)
 3. O botão **"Baixar Currículo"** no Hero banner já puxa o PDF automaticamente
 
@@ -47,12 +47,12 @@ npm run build
 
 ```
 src/
+├── assets/
+│   └── resumes/    # PDFs de currículo (detectados automaticamente)
 ├── components/     # Componentes da página (Hero, About, Contact, etc.)
 ├── i18n/           # Traduções (PT, EN, ES)
 ├── App.tsx         # Componente principal
 └── main.tsx        # Ponto de entrada
-public/
-└── resumes/        # PDFs de currículo (detectados automaticamente)
 ```
 
 ## 📝 Licença
