@@ -2,6 +2,13 @@ import { motion } from 'framer-motion'
 import { Github, Linkedin, FileDown, ArrowDown } from 'lucide-react'
 import { useI18n } from '../i18n/I18nContext'
 
+// Detecta automaticamente o primeiro PDF em public/resumes/
+const pdfFiles = import.meta.glob('/resumes/*.pdf', { eager: true, query: '?url', import: 'default' }) as Record<string, string>
+const resumeEntries = Object.entries(pdfFiles)
+const resumeUrl = resumeEntries.length > 0
+    ? resumeEntries[0][1] as string
+    : '/resume.pdf'
+
 export default function Hero() {
     const { t } = useI18n()
 
@@ -53,8 +60,8 @@ export default function Hero() {
                         {t.hero.viewProjects}
                     </a>
                     <a
-                        href="/resume.pdf"
-                        target="_blank"
+                        href={resumeUrl}
+                        download
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 px-6 py-3 border border-dark-600 hover:border-accent/50 text-gray-300 hover:text-white text-sm font-medium rounded-lg transition-all duration-200"
                     >
