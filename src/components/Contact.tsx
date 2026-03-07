@@ -2,8 +2,10 @@ import { useState, type FormEvent } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { Github, Linkedin, Mail, Send } from 'lucide-react'
+import { useI18n } from '../i18n/I18nContext'
 
 export default function Contact() {
+    const { t } = useI18n()
     const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
     const [submitted, setSubmitted] = useState(false)
 
@@ -22,10 +24,10 @@ export default function Contact() {
                     transition={{ duration: 0.7 }}
                 >
                     <h2 className="text-sm font-medium text-accent tracking-widest uppercase mb-2">
-                        Contact
+                        {t.contact.label}
                     </h2>
                     <h3 className="text-3xl md:text-4xl font-bold text-white mb-12">
-                        Get In Touch
+                        {t.contact.heading}
                     </h3>
 
                     <div className="grid md:grid-cols-2 gap-12">
@@ -33,26 +35,26 @@ export default function Contact() {
                         <form onSubmit={handleSubmit} className="space-y-5">
                             <div>
                                 <label htmlFor="name" className="block text-sm text-gray-400 mb-1.5">
-                                    Name
+                                    {t.contact.name}
                                 </label>
                                 <input
                                     id="name"
                                     type="text"
                                     required
                                     className="w-full px-4 py-3 bg-dark-800 border border-dark-600/50 rounded-lg text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-accent/50 transition-colors"
-                                    placeholder="Your name"
+                                    placeholder={t.contact.namePlaceholder}
                                 />
                             </div>
                             <div>
                                 <label htmlFor="email" className="block text-sm text-gray-400 mb-1.5">
-                                    Email
+                                    {t.contact.email}
                                 </label>
                                 <input
                                     id="email"
                                     type="email"
                                     required
                                     className="w-full px-4 py-3 bg-dark-800 border border-dark-600/50 rounded-lg text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-accent/50 transition-colors"
-                                    placeholder="your@email.com"
+                                    placeholder={t.contact.emailPlaceholder}
                                 />
                             </div>
                             <div>
@@ -60,14 +62,14 @@ export default function Contact() {
                                     htmlFor="message"
                                     className="block text-sm text-gray-400 mb-1.5"
                                 >
-                                    Message
+                                    {t.contact.message}
                                 </label>
                                 <textarea
                                     id="message"
                                     rows={5}
                                     required
                                     className="w-full px-4 py-3 bg-dark-800 border border-dark-600/50 rounded-lg text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-accent/50 transition-colors resize-none"
-                                    placeholder="Your message..."
+                                    placeholder={t.contact.messagePlaceholder}
                                 />
                             </div>
                             <button
@@ -75,16 +77,14 @@ export default function Contact() {
                                 className="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-dark text-white text-sm font-medium rounded-lg transition-all duration-200 hover:shadow-[0_0_24px_rgba(59,130,246,0.3)]"
                             >
                                 <Send size={16} />
-                                {submitted ? 'Sent!' : 'Send Message'}
+                                {submitted ? t.contact.sent : t.contact.send}
                             </button>
                         </form>
 
                         {/* Info */}
                         <div className="space-y-8">
                             <p className="text-gray-400 leading-relaxed">
-                                I'm always open to discussing new projects, creative ideas, or
-                                opportunities to be part of your team. Feel free to reach out
-                                through any of the channels below.
+                                {t.contact.info}
                             </p>
 
                             <div className="space-y-4">

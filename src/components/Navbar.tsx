@@ -1,24 +1,49 @@
 import { useState, useEffect } from 'react'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Globe } from 'lucide-react'
+import { useI18n } from '../i18n/I18nContext'
+import type { Language } from '../i18n/translations'
 
-const navLinks = [
-    { label: 'About', href: '#about' },
-    { label: 'Tech Stack', href: '#tech-stack' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'Blog', href: '#blog' },
-    { label: 'Timeline', href: '#timeline' },
-    { label: 'Contact', href: '#contact' },
-]
+const langLabels: Record<Language, string> = {
+    pt: 'PT',
+    en: 'EN',
+    es: 'ES',
+}
+
+const langFullNames: Record<Language, string> = {
+    pt: 'Português',
+    en: 'English',
+    es: 'Español',
+}
 
 export default function Navbar() {
+    const { lang, t, setLang } = useI18n()
     const [isOpen, setIsOpen] = useState(false)
     const [scrolled, setScrolled] = useState(false)
+    const [langMenuOpen, setLangMenuOpen] = useState(false)
+
+    const navLinks = [
+        { label: t.nav.about, href: '#about' },
+        { label: t.nav.techStack, href: '#tech-stack' },
+        { label: t.nav.projects, href: '#projects' },
+        { label: t.nav.blog, href: '#blog' },
+        { label: t.nav.timeline, href: '#timeline' },
+        { label: t.nav.contact, href: '#contact' },
+    ]
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 50)
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
+
+    // Close lang menu when clicking outside
+    useEffect(() => {
+        const handleClick = () => setLangMenuOpen(false)
+        if (langMenuOpen) {
+            document.addEventListener('click', handleClick)
+            return () => document.removeEventListener('click', handleClick)
+        }
+    }, [langMenuOpen])
 
     return (
         <nav
@@ -47,16 +72,86 @@ export default function Navbar() {
                             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full" />
                         </a>
                     ))}
+
+                    {/* Language Switcher */}
+                    <div className="relative">
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation()
+                                setLangMenuOpen(!langMenuOpen)
+                            }}
+                            className="flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors duration-200 px-2.5 py-1.5 border border-dark-600/50 rounded-lg hover:border-accent/50"
+                        >
+                            <Globe size={14} />
+                            {langLabels[lang]}
+                        </button>
+
+                        {langMenuOpen && (
+                            <div className="absolute right-0 top-full mt-2 bg-dark-800 border border-dark-600/50 rounded-lg overflow-hidden shadow-xl min-w-[140px]">
+                                {(Object.keys(langLabels) as Language[]).map((l) => (
+                                    <button
+                                        key={l}
+                                        onClick={() => {
+                                            setLang(l)
+                                            setLangMenuOpen(false)
+                                        }}
+                                        className={`w-full text-left px-4 py-2.5 text-sm transition-colors flex items-center justify-between ${lang === l
+                                                ? 'bg-accent/10 text-accent'
+                                                : 'text-gray-400 hover:bg-dark-700 hover:text-white'
+                                            }`}
+                                    >
+                                        {langFullNames[l]}
+                                        <span className="text-xs opacity-60">{langLabels[l]}</span>
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 </div>
 
                 {/* Mobile toggle */}
-                <button
-                    onClick={() => setIsOpen(!isOpen)}
-                    className="md:hidden text-gray-400 hover:text-white transition-colors"
-                    aria-label="Toggle menu"
-                >
-                    {isOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
+                <div className="flex items-center gap-3 md:hidden">
+                    {/* Mobile language switcher */}
+                    <div className="relative">
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation()
+                                setLangMenuOpen(!langMenuOpen)
+                            }}
+                            className="flex items-center gap-1 text-xs text-gray-400 hover:text-white transition-colors px-2 py-1.5 border border-dark-600/50 rounded-lg"
+                        >
+                            <Globe size={12} />
+                            {langLabels[lang]}
+                        </button>
+                        {langMenuOpen && (
+                            <div className="absolute right-0 top-full mt-2 bg-dark-800 border border-dark-600/50 rounded-lg overflow-hidden shadow-xl min-w-[130px] z-50">
+                                {(Object.keys(langLabels) as Language[]).map((l) => (
+                                    <button
+                                        key={l}
+                                        onClick={() => {
+                                            setLang(l)
+                                            setLangMenuOpen(false)
+                                        }}
+                                        className={`w-full text-left px-3 py-2 text-sm transition-colors ${lang === l
+                                                ? 'bg-accent/10 text-accent'
+                                                : 'text-gray-400 hover:bg-dark-700 hover:text-white'
+                                            }`}
+                                    >
+                                        {langFullNames[l]}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                    <button
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="text-gray-400 hover:text-white transition-colors"
+                        aria-label="Toggle menu"
+                    >
+                        {isOpen ? <X size={24} /> : <Menu size={24} />}
+                    </button>
+                </div>
             </div>
 
             {/* Mobile menu */}

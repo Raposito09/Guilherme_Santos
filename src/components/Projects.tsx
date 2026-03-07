@@ -1,60 +1,24 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { Github, ExternalLink } from 'lucide-react'
+import { useI18n } from '../i18n/I18nContext'
 
-interface Project {
-    title: string
-    description: string
-    technologies: string[]
-    features: string[]
-    github: string
-    demo?: string
-}
-
-const projects: Project[] = [
-    {
-        title: 'Customer Churn Prediction',
-        description:
-            'Machine learning model to predict customer churn using logistic regression and data preprocessing techniques.',
-        technologies: ['Python', 'Pandas', 'Scikit-learn'],
-        features: [
-            'Data preprocessing',
-            'Feature engineering',
-            'Model training',
-            'Accuracy evaluation',
-        ],
-        github: 'https://github.com/guilherme-santos/churn-prediction',
-    },
-    {
-        title: 'Data Analysis Dashboard',
-        description:
-            'Data exploration and visualization project using Python and Power BI for actionable business insights.',
-        technologies: ['Python', 'Power BI', 'Pandas', 'SQL'],
-        features: [
-            'Interactive dashboards',
-            'Data cleaning pipeline',
-            'Statistical analysis',
-            'Visual storytelling',
-        ],
-        github: 'https://github.com/guilherme-santos/data-dashboard',
-        demo: '#',
-    },
-    {
-        title: 'Cloud API Deployment',
-        description:
-            'REST API deployed on AWS using Docker and Python, showcasing cloud infrastructure and containerization skills.',
-        technologies: ['Python', 'AWS', 'Docker', 'Flask'],
-        features: [
-            'RESTful endpoints',
-            'Docker containerization',
-            'AWS deployment',
-            'API documentation',
-        ],
-        github: 'https://github.com/guilherme-santos/cloud-api',
-    },
+const techLists = [
+    ['Python', 'Pandas', 'Scikit-learn'],
+    ['Python', 'Power BI', 'Pandas', 'SQL'],
+    ['Python', 'AWS', 'Docker', 'Flask'],
 ]
 
+const githubLinks = [
+    'https://github.com/guilherme-santos/churn-prediction',
+    'https://github.com/guilherme-santos/data-dashboard',
+    'https://github.com/guilherme-santos/cloud-api',
+]
+
+const demoLinks = [undefined, '#', undefined]
+
 export default function Projects() {
+    const { t } = useI18n()
     const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
     return (
@@ -66,16 +30,16 @@ export default function Projects() {
                     transition={{ duration: 0.7 }}
                 >
                     <h2 className="text-sm font-medium text-accent tracking-widest uppercase mb-2">
-                        Projects
+                        {t.projects.label}
                     </h2>
                     <h3 className="text-3xl md:text-4xl font-bold text-white mb-12">
-                        What I've Built
+                        {t.projects.heading}
                     </h3>
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {projects.map((project, i) => (
+                        {t.projects.items.map((project, i) => (
                             <motion.div
-                                key={project.title}
+                                key={i}
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={inView ? { opacity: 1, y: 0 } : {}}
                                 transition={{ duration: 0.5, delay: 0.15 * i }}
@@ -87,7 +51,7 @@ export default function Projects() {
                                     </h4>
                                     <div className="flex gap-2">
                                         <a
-                                            href={project.github}
+                                            href={githubLinks[i]}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="text-gray-500 hover:text-accent transition-colors"
@@ -95,9 +59,9 @@ export default function Projects() {
                                         >
                                             <Github size={18} />
                                         </a>
-                                        {project.demo && (
+                                        {demoLinks[i] && (
                                             <a
-                                                href={project.demo}
+                                                href={demoLinks[i]}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="text-gray-500 hover:text-accent transition-colors"
@@ -128,7 +92,7 @@ export default function Projects() {
                                 </div>
 
                                 <div className="flex flex-wrap gap-2 mt-auto pt-4 border-t border-dark-600/50">
-                                    {project.technologies.map((tech) => (
+                                    {techLists[i].map((tech) => (
                                         <span
                                             key={tech}
                                             className="text-xs px-2.5 py-1 bg-accent/10 text-accent rounded-md"

@@ -1,20 +1,21 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import { useI18n } from '../i18n/I18nContext'
 
 interface TechItem {
     name: string
-    level: number // 0–100
+    level: number
 }
 
 interface TechCategory {
-    title: string
+    titleKey: 'languages' | 'cloud' | 'data' | 'tools'
     icon: string
     items: TechItem[]
 }
 
 const categories: TechCategory[] = [
     {
-        title: 'Languages',
+        titleKey: 'languages',
         icon: '⟨/⟩',
         items: [
             { name: 'Python', level: 85 },
@@ -24,7 +25,7 @@ const categories: TechCategory[] = [
         ],
     },
     {
-        title: 'Cloud',
+        titleKey: 'cloud',
         icon: '☁',
         items: [
             { name: 'AWS', level: 60 },
@@ -32,7 +33,7 @@ const categories: TechCategory[] = [
         ],
     },
     {
-        title: 'Data',
+        titleKey: 'data',
         icon: '📊',
         items: [
             { name: 'Pandas', level: 80 },
@@ -41,7 +42,7 @@ const categories: TechCategory[] = [
         ],
     },
     {
-        title: 'Tools',
+        titleKey: 'tools',
         icon: '🛠',
         items: [
             { name: 'Git', level: 80 },
@@ -52,6 +53,7 @@ const categories: TechCategory[] = [
 ]
 
 export default function TechStack() {
+    const { t } = useI18n()
     const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
     return (
@@ -63,16 +65,16 @@ export default function TechStack() {
                     transition={{ duration: 0.7 }}
                 >
                     <h2 className="text-sm font-medium text-accent tracking-widest uppercase mb-2">
-                        Tech Stack
+                        {t.techStack.label}
                     </h2>
                     <h3 className="text-3xl md:text-4xl font-bold text-white mb-12">
-                        Technologies I Work With
+                        {t.techStack.heading}
                     </h3>
 
                     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {categories.map((cat, catIdx) => (
                             <motion.div
-                                key={cat.title}
+                                key={cat.titleKey}
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={inView ? { opacity: 1, y: 0 } : {}}
                                 transition={{ duration: 0.5, delay: 0.1 * catIdx }}
@@ -80,7 +82,9 @@ export default function TechStack() {
                             >
                                 <div className="flex items-center gap-3 mb-6">
                                     <span className="text-2xl">{cat.icon}</span>
-                                    <h4 className="text-lg font-semibold text-white">{cat.title}</h4>
+                                    <h4 className="text-lg font-semibold text-white">
+                                        {t.techStack.categories[cat.titleKey]}
+                                    </h4>
                                 </div>
 
                                 <div className="space-y-4">

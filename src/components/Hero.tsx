@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion'
 import { Github, Linkedin, FileDown, ArrowDown } from 'lucide-react'
+import { useI18n } from '../i18n/I18nContext'
 
 export default function Hero() {
+    const { t } = useI18n()
+
     return (
         <section
             id="hero"
@@ -20,7 +23,7 @@ export default function Hero() {
                     transition={{ duration: 0.8 }}
                 >
                     <p className="text-accent font-medium text-sm tracking-widest uppercase mb-4">
-                        Hello, I'm
+                        {t.hero.greeting}
                     </p>
                     <h1 className="text-5xl md:text-7xl font-extrabold text-white leading-tight tracking-tight">
                         Guilherme{' '}
@@ -29,11 +32,10 @@ export default function Hero() {
                         </span>
                     </h1>
                     <p className="mt-4 text-lg md:text-xl text-gray-400 font-light">
-                        Computer Science Student | Cloud, Data &amp; Backend Enthusiast
+                        {t.hero.title}
                     </p>
                     <p className="mt-3 text-base text-gray-400/80 max-w-xl mx-auto leading-relaxed">
-                        Passionate about building efficient systems, data-driven solutions
-                        and cloud-based applications.
+                        {t.hero.description}
                     </p>
                 </motion.div>
 
@@ -48,7 +50,7 @@ export default function Hero() {
                         className="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-dark text-white text-sm font-medium rounded-lg transition-all duration-200 hover:shadow-[0_0_24px_rgba(59,130,246,0.3)]"
                     >
                         <ArrowDown size={16} />
-                        View Projects
+                        {t.hero.viewProjects}
                     </a>
                     <a
                         href="/resume.pdf"
@@ -57,7 +59,7 @@ export default function Hero() {
                         className="inline-flex items-center gap-2 px-6 py-3 border border-dark-600 hover:border-accent/50 text-gray-300 hover:text-white text-sm font-medium rounded-lg transition-all duration-200"
                     >
                         <FileDown size={16} />
-                        Download Resume
+                        {t.hero.downloadResume}
                     </a>
                     <a
                         href="https://github.com/guilherme-santos"

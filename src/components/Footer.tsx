@@ -1,9 +1,13 @@
+import { useI18n } from '../i18n/I18nContext'
+
 export default function Footer() {
+    const { t } = useI18n()
+
     return (
         <footer className="py-8 px-6 border-t border-dark-600/50">
             <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
                 <p className="text-sm text-gray-500">
-                    © {new Date().getFullYear()} Guilherme Santos. Built with React &amp; Tailwind CSS.
+                    © {new Date().getFullYear()} Guilherme Santos. {t.footer.builtWith}
                 </p>
                 <div className="flex items-center gap-6">
                     <a

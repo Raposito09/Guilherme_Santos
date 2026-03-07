@@ -1,15 +1,17 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { Code2, Cloud, Database, Terminal } from 'lucide-react'
+import { useI18n } from '../i18n/I18nContext'
 
 export default function About() {
+    const { t } = useI18n()
     const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 })
 
     const stats = [
-        { icon: <Code2 size={20} />, label: 'Languages', value: '4+' },
-        { icon: <Cloud size={20} />, label: 'Cloud Platforms', value: 'AWS' },
-        { icon: <Database size={20} />, label: 'Data Tools', value: '5+' },
-        { icon: <Terminal size={20} />, label: 'Projects', value: '10+' },
+        { icon: <Code2 size={20} />, label: t.about.stats.languages, value: '4+' },
+        { icon: <Cloud size={20} />, label: t.about.stats.cloud, value: 'AWS' },
+        { icon: <Database size={20} />, label: t.about.stats.data, value: '5+' },
+        { icon: <Terminal size={20} />, label: t.about.stats.projects, value: '10+' },
     ]
 
     return (
@@ -21,33 +23,20 @@ export default function About() {
                     transition={{ duration: 0.7 }}
                 >
                     <h2 className="text-sm font-medium text-accent tracking-widest uppercase mb-2">
-                        About
+                        {t.about.label}
                     </h2>
                     <h3 className="text-3xl md:text-4xl font-bold text-white mb-8">
-                        Who I Am
+                        {t.about.heading}
                     </h3>
 
                     <div className="grid md:grid-cols-5 gap-12">
                         <div className="md:col-span-3 space-y-4">
-                            <p className="text-gray-300 leading-relaxed">
-                                I'm a Computer Science student deeply passionate about{' '}
-                                <span className="text-white font-medium">cloud computing</span>,{' '}
-                                <span className="text-white font-medium">data engineering</span>, and{' '}
-                                <span className="text-white font-medium">machine learning</span>. I
-                                thrive on turning complex problems into elegant, scalable solutions.
-                            </p>
-                            <p className="text-gray-400 leading-relaxed">
-                                With hands-on experience building projects using Python, SQL, and
-                                modern data analysis tools, I'm focused on developing practical
-                                applications that solve real-world problems. Currently diving deeper
-                                into scalable system design, cloud architecture, and backend
-                                development.
-                            </p>
-                            <p className="text-gray-400 leading-relaxed">
-                                I believe in writing clean, maintainable code and continuously
-                                learning new technologies. My goal is to contribute to impactful
-                                engineering teams building products at scale.
-                            </p>
+                            <p
+                                className="text-gray-300 leading-relaxed [&>b]:text-white [&>b]:font-medium"
+                                dangerouslySetInnerHTML={{ __html: t.about.p1 }}
+                            />
+                            <p className="text-gray-400 leading-relaxed">{t.about.p2}</p>
+                            <p className="text-gray-400 leading-relaxed">{t.about.p3}</p>
                         </div>
 
                         <div className="md:col-span-2 grid grid-cols-2 gap-4">

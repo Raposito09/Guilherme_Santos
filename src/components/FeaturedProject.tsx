@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { Github, ExternalLink } from 'lucide-react'
+import { useI18n } from '../i18n/I18nContext'
 
 export default function FeaturedProject() {
+    const { t } = useI18n()
     const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
     return (
@@ -14,10 +16,10 @@ export default function FeaturedProject() {
                     transition={{ duration: 0.7 }}
                 >
                     <h2 className="text-sm font-medium text-accent tracking-widest uppercase mb-2">
-                        Featured
+                        {t.featured.label}
                     </h2>
                     <h3 className="text-3xl md:text-4xl font-bold text-white mb-12">
-                        Highlighted Project
+                        {t.featured.heading}
                     </h3>
 
                     <div className="bg-dark-800 border border-dark-600/50 rounded-2xl overflow-hidden">
@@ -34,7 +36,7 @@ export default function FeaturedProject() {
                         <div className="p-8 md:p-10">
                             <div className="flex items-center gap-4 mb-6">
                                 <h4 className="text-2xl md:text-3xl font-bold text-white">
-                                    Customer Churn Prediction
+                                    {t.featured.projectTitle}
                                 </h4>
                                 <div className="flex gap-3">
                                     <a
@@ -59,22 +61,18 @@ export default function FeaturedProject() {
                                 <div className="space-y-6">
                                     <div>
                                         <h5 className="text-sm font-semibold text-accent uppercase tracking-wider mb-2">
-                                            Problem
+                                            {t.featured.problem}
                                         </h5>
                                         <p className="text-gray-400 text-sm leading-relaxed">
-                                            Businesses lose significant revenue due to customer churn. Identifying
-                                            at-risk customers early enables proactive retention strategies, but
-                                            traditional methods lack predictive accuracy.
+                                            {t.featured.problemText}
                                         </p>
                                     </div>
                                     <div>
                                         <h5 className="text-sm font-semibold text-accent uppercase tracking-wider mb-2">
-                                            Solution
+                                            {t.featured.solution}
                                         </h5>
                                         <p className="text-gray-400 text-sm leading-relaxed">
-                                            Built a machine learning pipeline using logistic regression to predict
-                                            customer churn with high accuracy. Implemented comprehensive data
-                                            preprocessing, feature engineering, and model evaluation workflows.
+                                            {t.featured.solutionText}
                                         </p>
                                     </div>
                                 </div>
@@ -83,7 +81,7 @@ export default function FeaturedProject() {
                                 <div className="space-y-6">
                                     <div>
                                         <h5 className="text-sm font-semibold text-accent uppercase tracking-wider mb-2">
-                                            Architecture
+                                            {t.featured.architecture}
                                         </h5>
                                         <div className="bg-dark-900/50 rounded-lg p-4 font-mono text-xs text-gray-400 space-y-1">
                                             <p>
@@ -105,12 +103,12 @@ export default function FeaturedProject() {
                                     </div>
                                     <div>
                                         <h5 className="text-sm font-semibold text-accent uppercase tracking-wider mb-2">
-                                            Results
+                                            {t.featured.results}
                                         </h5>
                                         <div className="flex gap-6">
                                             <div>
                                                 <p className="text-3xl font-bold text-white">92%</p>
-                                                <p className="text-xs text-gray-500">Accuracy</p>
+                                                <p className="text-xs text-gray-500">{t.featured.accuracy}</p>
                                             </div>
                                             <div>
                                                 <p className="text-3xl font-bold text-white">0.89</p>
@@ -118,7 +116,7 @@ export default function FeaturedProject() {
                                             </div>
                                             <div>
                                                 <p className="text-3xl font-bold text-white">15+</p>
-                                                <p className="text-xs text-gray-500">Features</p>
+                                                <p className="text-xs text-gray-500">{t.featured.features}</p>
                                             </div>
                                         </div>
                                     </div>
