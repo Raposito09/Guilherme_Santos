@@ -69,7 +69,7 @@ export default function Hero() {
                         {t.hero.downloadResume}
                     </a>
                     <a
-                        href="https://github.com/guilherme-santos"
+                        href="https://github.com/Raposito09"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 px-4 py-3 border border-dark-600 hover:border-accent/50 text-gray-400 hover:text-white rounded-lg transition-all duration-200"
@@ -78,7 +78,7 @@ export default function Hero() {
                         <Github size={18} />
                     </a>
                     <a
-                        href="https://linkedin.com/in/guilherme-santos"
+                        href="https://www.linkedin.com/in/guilherme-pereira-santos-06007b2b5/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 px-4 py-3 border border-dark-600 hover:border-accent/50 text-gray-400 hover:text-white rounded-lg transition-all duration-200"

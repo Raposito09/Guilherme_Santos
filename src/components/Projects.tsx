@@ -10,9 +10,9 @@ const techLists = [
 ]
 
 const githubLinks = [
-    'https://github.com/guilherme-santos/churn-prediction',
-    'https://github.com/guilherme-santos/data-dashboard',
-    'https://github.com/guilherme-santos/cloud-api',
+    'https://github.com/Raposito09/churn-prediction',
+    'https://github.com/Raposito09/data-dashboard',
+    'https://github.com/Raposito09/cloud-api',
 ]
 
 const demoLinks = [undefined, '#', undefined]

@@ -170,7 +170,7 @@ export default function Contact() {
                                 </a>
 
                                 <a
-                                    href="https://linkedin.com/in/guilherme-santos"
+                                    href="https://www.linkedin.com/in/guilherme-pereira-santos-06007b2b5/"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center gap-4 text-gray-400 hover:text-white transition-colors group"
@@ -180,7 +180,7 @@ export default function Contact() {
                                     </div>
                                     <div>
                                         <p className="text-sm font-medium text-white">LinkedIn</p>
-                                        <p className="text-xs text-gray-500">linkedin.com/in/guilherme-santos</p>
+                                        <p className="text-xs text-gray-500">linkedin.com/in/guilherme-pereira-santos-06007b2b5</p>
                                     </div>
                                 </a>
 

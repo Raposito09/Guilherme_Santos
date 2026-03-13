@@ -40,7 +40,7 @@ export default function FeaturedProject() {
                                 </h4>
                                 <div className="flex gap-3">
                                     <a
-                                        href="https://github.com/guilherme-santos/churn-prediction"
+                                        href="https://github.com/Raposito09/churn-prediction"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-gray-500 hover:text-accent transition-colors"
